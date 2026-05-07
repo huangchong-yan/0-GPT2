@@ -6,7 +6,7 @@ tqdm>=4.66
 pandas>=2.0
 matplotlib>=3.8
 psutil>=5.9
+pytest>=8.0
 
 # Optional: required only when loading the original OpenAI GPT-2 TensorFlow checkpoints.
 # tensorflow>=2.15
-

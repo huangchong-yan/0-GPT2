@@ -1,7 +1,7 @@
 <h1 align="center">Build GPT-2 From Scratch & LLM Fine-tuning Workflows</h1>
 
 <h4 align="center">
-从零构建类 GPT-2 大模型，并完成分类微调、指令微调与自动化评估工作流
+A compact, runnable learning project for implementing GPT-2-style models, classification fine-tuning, instruction tuning, and automated evaluation.
 </h4>
 
 <p align="center">
@@ -12,9 +12,9 @@
 </p>
 
 <p align="center">
-  <a href="#-项目简介">项目简介</a> •
+  <a href="#-overview">Overview</a> •
   <a href="#-highlights">Highlights</a> •
-  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-installation">Installation</a> •
   <a href="#-running-examples">Examples</a> •
   <a href="#-project-structure">Structure</a>
 </p>
@@ -23,52 +23,54 @@
 
 ## 📰 News
 
-* **[2026.05.07]** 重新整理项目结构，形成适合上传 GitHub 的模块化代码仓库。
-* **[2026.05.07]** 新增 `src/gpt2_from_scratch/` 核心包，拆分 attention、model、training、generation、fine-tuning 与 evaluation 模块。
-* **[2026.05.07]** 新增章节脚本入口，支持第 2-7 章的快速运行、微调与自动化评估流程。
-* **[2026.05.07]** 新增旧版 checkpoint 兼容加载逻辑，可读取原学习脚本保存的 `review_classifier.pth`。
+* **[2026.05.07]** Reorganized the original learning scripts into a GitHub-ready Python project.
+* **[2026.05.07]** Added the reusable `src/gpt2_from_scratch/` package with separate modules for attention, model definition, generation, training, fine-tuning, and evaluation.
+* **[2026.05.07]** Added chapter-based scripts for quick demos and workflow execution.
+* **[2026.05.07]** Added legacy checkpoint compatibility for models saved by the original notebook-style scripts.
+* **[2026.05.07]** Added tests, GitHub Actions CI, citation metadata, and attribution notes.
 
-## 📌 项目简介
+## 📌 Overview
 
-本项目包含两个相互衔接的 LLM 学习与实践工程：
+This repository contains two connected learning projects.
 
 ### Project 1: Build GPT-2 From Scratch
 
-对应第 1-5 章，目标是从基础组件开始实现一个类 GPT-2 自回归语言模型：
+Chapters 1-5 implement a GPT-2-style autoregressive language model from core components:
 
-* 文本读取、BPE tokenization 与滑动窗口采样
-* 自注意力、因果注意力、多头注意力
-* LayerNorm、GELU、FeedForward、Transformer Block
-* GPTModel 前向计算、参数统计与文本生成
-* 语言模型训练循环、top-k / temperature sampling
-* 加载 OpenAI GPT-2 checkpoint 到本地实现的模型结构中
+* Text loading, GPT-2 BPE tokenization, and sliding-window sampling
+* Self-attention, causal attention, and multi-head attention
+* LayerNorm, GELU, feed-forward layers, and Transformer blocks
+* GPTModel forward pass, parameter counting, and text generation
+* Language-model training loops and loss evaluation
+* Greedy decoding, top-k sampling, and temperature sampling
+* Loading original OpenAI GPT-2 checkpoint weights into the local model implementation
 
-### Project 2: LLM Fine-tuning & Evaluation Workflows
+### Project 2: LLM Fine-tuning and Evaluation Workflows
 
-对应第 6-7 章，目标是在基础 GPT 模型上构建更完整的微调与评估流程：
+Chapters 6-7 build practical fine-tuning and evaluation workflows on top of the GPT implementation:
 
-* SMS Spam 二分类任务微调
-* 指令数据集格式化与 SFT dataloader
-* 指令微调训练与模型响应生成
-* 使用本地 Ollama 模型进行自动化评分
+* SMS spam classification fine-tuning
+* Instruction dataset formatting and supervised fine-tuning data loaders
+* Instruction-tuned response generation
+* Automated response scoring with a local Ollama judge model
 
 ## 😮 Highlights
 
 ### 💡 Educational but runnable
 
-代码保留了“从零理解”的学习路径，同时整理成可复用模块。你可以单独阅读 `attention.py`、`model.py`，也可以直接运行 `scripts/` 中的章节入口。
+The code keeps the step-by-step learning path while being organized as reusable modules. You can inspect individual files such as `attention.py` and `model.py`, or run chapter scripts directly from `scripts/`.
 
 ### 🔥 Two complete workflows
 
-仓库不是只实现一个模型结构，还覆盖了从数据准备、预训练式语言建模、分类微调、指令微调到自动化评估的完整路径。
+The repository goes beyond model definition. It covers data preparation, language-model training utilities, classification fine-tuning, instruction tuning, response generation, and automated evaluation.
 
 ### 🧩 GitHub-ready structure
 
-原始草稿脚本、本地权重、生成数据和缓存文件已通过 `.gitignore` 排除。上传 GitHub 时主仓库保持轻量、清晰、可复现。
+Large checkpoints, generated data, caches, and original scratch scripts are excluded through `.gitignore`, keeping the public repository clean and reproducible.
 
-## 🛠️ Requirements and Installation
+## 🛠️ Installation
 
-建议使用 Python 3.10 或更高版本。
+Python 3.10 or newer is recommended.
 
 ```bash
 git clone https://github.com/huangchong-yan/0-GPT2.git
@@ -79,7 +81,13 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-如果需要加载 OpenAI 原始 GPT-2 TensorFlow checkpoint，请额外安装：
+For Linux or macOS, activate the environment with:
+
+```bash
+source .venv/bin/activate
+```
+
+To load the original OpenAI GPT-2 TensorFlow checkpoints, install TensorFlow as well:
 
 ```bash
 pip install "tensorflow>=2.15"
@@ -107,13 +115,13 @@ python scripts/ch04_build_gpt.py --config tiny
 
 ### Chapter 5: Text Generation
 
-默认使用 tiny GPT 配置，适合快速检查代码是否能运行：
+Run a quick smoke test with the tiny GPT configuration:
 
 ```bash
 python scripts/ch05_pretrain_or_load_gpt2.py --prompt "Every effort moves you"
 ```
 
-加载 OpenAI GPT-2 124M 权重后生成文本：
+Generate text with the OpenAI GPT-2 124M weights:
 
 ```bash
 python scripts/ch05_pretrain_or_load_gpt2.py --pretrained --prompt "Every effort moves you"
@@ -121,19 +129,19 @@ python scripts/ch05_pretrain_or_load_gpt2.py --pretrained --prompt "Every effort
 
 ### Chapter 6: Classification Fine-tuning
 
-准备 SMS spam 数据集：
+Prepare the SMS spam dataset:
 
 ```bash
 python scripts/ch06_finetune_classifier.py --mode prepare
 ```
 
-训练分类器：
+Train the classifier:
 
 ```bash
 python scripts/ch06_finetune_classifier.py --mode train --epochs 5
 ```
 
-使用已训练 checkpoint 推理：
+Run inference with a trained checkpoint:
 
 ```bash
 python scripts/ch06_finetune_classifier.py --mode infer --text "Hey, are we still meeting tonight?"
@@ -141,25 +149,25 @@ python scripts/ch06_finetune_classifier.py --mode infer --text "Hey, are we stil
 
 ### Chapter 7: Instruction Fine-tuning and Evaluation
 
-预览指令数据格式：
+Preview the instruction format:
 
 ```bash
 python scripts/ch07_instruction_tuning_eval.py --mode preview
 ```
 
-训练 SFT 模型：
+Train an SFT model:
 
 ```bash
 python scripts/ch07_instruction_tuning_eval.py --mode train --epochs 2
 ```
 
-生成测试集响应：
+Generate responses for the test set:
 
 ```bash
 python scripts/ch07_instruction_tuning_eval.py --mode generate-responses
 ```
 
-使用本地 Ollama 模型自动评分：
+Score generated responses with a local Ollama model:
 
 ```bash
 python scripts/ch07_instruction_tuning_eval.py --mode evaluate --ollama-model phi3
@@ -176,11 +184,11 @@ python scripts/ch07_instruction_tuning_eval.py --mode evaluate --ollama-model ph
 │   ├── config.py                # GPT and GPT-2 model configs
 │   ├── data.py                  # Tokenization and sliding-window dataset
 │   ├── evaluation.py            # Ollama-based automatic evaluation
-│   ├── generation.py            # Greedy, top-k and temperature decoding
+│   ├── generation.py            # Greedy, top-k, and temperature decoding
 │   ├── gpt2_weights.py          # Download and load OpenAI GPT-2 checkpoints
 │   ├── instruction_tuning.py    # Instruction dataset and SFT collate function
 │   ├── model.py                 # LayerNorm, GELU, TransformerBlock, GPTModel
-│   ├── runtime.py               # Windows/UTF-8 runtime helpers
+│   ├── runtime.py               # Windows and UTF-8 runtime helpers
 │   └── training.py              # Language-model training and loss evaluation
 ├── scripts/
 │   ├── ch02_data_pipeline.py
@@ -189,11 +197,16 @@ python scripts/ch07_instruction_tuning_eval.py --mode evaluate --ollama-model ph
 │   ├── ch05_pretrain_or_load_gpt2.py
 │   ├── ch06_finetune_classifier.py
 │   └── ch07_instruction_tuning_eval.py
+├── tests/
+│   ├── test_attention.py
+│   ├── test_instruction_tuning.py
+│   └── test_model.py
 ├── docs/
 │   ├── CHAPTERS.md
 │   └── UPLOAD_TO_GITHUB.md
-├── instruction-data.json
-├── the-verdict.txt
+├── .github/workflows/ci.yml
+├── CITATION.cff
+├── NOTICE
 ├── requirements.txt
 ├── pyproject.toml
 ├── LICENSE
@@ -226,12 +239,13 @@ The following files are generated locally or too large for normal GitHub commits
 
 If you want to publish trained weights, use GitHub Releases, Hugging Face Hub, or another model hosting service instead of committing them directly.
 
-## ✅ Verified Commands
+## ✅ Verification
 
-The following commands have been tested in the local workspace:
+The following commands are suitable for quick local checks:
 
 ```bash
 python -m compileall src scripts
+pytest
 python scripts/ch02_data_pipeline.py --text-file the-verdict.txt --batch-size 2 --max-length 4 --stride 4
 python scripts/ch03_attention_demo.py
 python scripts/ch04_build_gpt.py --config tiny
@@ -264,3 +278,4 @@ If this repository helps your learning or project, please consider citing the or
   publisher = {Manning Publications}
 }
 ```
+

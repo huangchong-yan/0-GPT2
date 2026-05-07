@@ -1,0 +1,13 @@
+Build GPT-2 From Scratch & LLM Fine-tuning Workflows
+Copyright 2026 Huang Chong-Yan
+
+This project includes learning-oriented code and organization work based on
+concepts and examples from Sebastian Raschka's "Build a Large Language Model
+From Scratch" and the companion LLMs-from-scratch repository.
+
+The GPT-2 checkpoint download and loading helper is adapted from:
+https://github.com/rasbt/LLMs-from-scratch
+
+The adapted helper retains the Apache License 2.0 notice from the upstream
+project where applicable.
+

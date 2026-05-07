@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "Build GPT-2 From Scratch & LLM Fine-tuning Workflows"
+message: "If this repository helps your learning or project, please cite it."
+type: software
+authors:
+  - family-names: Huang
+    given-names: Chong-Yan
+repository-code: "https://github.com/huangchong-yan/0-GPT2"
+license: Apache-2.0
+version: "0.1.0"
+date-released: "2026-05-07"
+keywords:
+  - GPT-2
+  - transformer
+  - language-model
+  - fine-tuning
+  - instruction-tuning
+  - PyTorch
+
