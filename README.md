@@ -1,72 +1,64 @@
 <h1 align="center">GPT-2 From Scratch and Fine-tuning Workflows</h1>
 
 <h4 align="center">
-A PyTorch implementation of a GPT-2-style language model with practical workflows for text generation, classification fine-tuning, instruction tuning, and automated response evaluation.
+Build a GPT-2-style Transformer in PyTorch, then use it for text generation, classification fine-tuning, instruction tuning, and automated response evaluation.
 </h4>
+
+<h5 align="center">
+If this project helps you understand GPT-style language models, please consider giving it a star ⭐.
+</h5>
 
 <p align="center">
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python" alt="Python"></a>
   <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-2.2%2B-ee4c2c?logo=pytorch" alt="PyTorch"></a>
   <a href="https://github.com/openai/tiktoken"><img src="https://img.shields.io/badge/Tokenizer-tiktoken-4b8bbe" alt="tiktoken"></a>
+  <a href="https://github.com/huangchong-yan/0-GPT2/actions"><img src="https://img.shields.io/badge/CI-pytest-2ea44f?logo=githubactions" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-yellow" alt="License"></a>
 </p>
 
 <p align="center">
-  <a href="#overview">Overview</a> •
-  <a href="#features">Features</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#quickstart">Quickstart</a> •
-  <a href="#project-structure">Structure</a>
+  <a href="#-news">News</a> •
+  <a href="#-highlights">Highlights</a> •
+  <a href="#-quickstart">Quickstart</a> •
+  <a href="#-workflows">Workflows</a> •
+  <a href="#-project-structure">Structure</a>
 </p>
 
 ---
 
-## Overview
+## 📰 News
 
-This repository implements the core building blocks of a GPT-2-style decoder-only Transformer and provides runnable workflows around it. The code is designed for readers who want to understand how GPT models work internally while still having scripts that can be executed end to end.
+* **[2026.05.07]** ✨ Public project README polished with a cleaner research-project style.
+* **[2026.05.07]** 🚀 Added GitHub Actions CI with syntax checks and unit tests.
+* **[2026.05.07]** ✅ Added unit tests for attention, GPT forward pass, generation, and instruction-tuning collation.
+* **[2026.05.07]** 🧩 Added citation metadata and attribution notes.
 
-The project covers four main areas:
+## 😮 Highlights
 
-* **Model internals**: token embeddings, positional embeddings, causal self-attention, multi-head attention, layer normalization, GELU, feed-forward networks, Transformer blocks, and GPT-style output heads.
-* **Text generation**: greedy decoding, top-k sampling, temperature sampling, and optional loading of original OpenAI GPT-2 checkpoint weights.
-* **Classification fine-tuning**: adapting GPT-2 for SMS spam classification with a lightweight classification head.
-* **Instruction tuning and evaluation**: formatting instruction-response data, supervised fine-tuning, generating model responses, and scoring outputs with a local Ollama judge model.
+This repository is a compact implementation of a GPT-2-style decoder-only Transformer, paired with practical workflows that show how the model can be used beyond a forward pass.
 
-## Features
+### 💡 Transparent GPT-2-style implementation
 
-### Transformer Components
+The model is implemented directly in PyTorch, with readable modules for token embeddings, positional embeddings, causal attention, multi-head attention, Transformer blocks, and the final language-model head.
 
-The model implementation is written directly in PyTorch and keeps the architecture transparent:
+### 🔥 Runnable generation and fine-tuning workflows
 
-* Scaled dot-product attention
-* Causal masking for autoregressive generation
-* Efficient multi-head self-attention
-* GPT-style Transformer blocks
-* Custom LayerNorm and GELU modules
-* Configurable tiny model and GPT-2-compatible model sizes
+The scripts cover text generation, loading GPT-2 checkpoint weights, SMS spam classification fine-tuning, instruction tuning, response generation, and local automated evaluation.
 
-### Generation Workflow
+### 🧪 Tested and CI-ready
 
-The generation utilities support both deterministic and sampling-based decoding:
+The repository includes lightweight unit tests and a GitHub Actions workflow so future changes can be checked automatically.
 
-* Greedy next-token decoding
-* Temperature scaling
-* Top-k filtering
-* Context-window cropping
-* GPT-2 BPE tokenization through `tiktoken`
+## 🤗 Overview
 
-### Fine-tuning Workflows
+The project focuses on four capabilities:
 
-The repository includes two practical fine-tuning examples:
+* **Model internals**: embeddings, causal self-attention, multi-head attention, layer normalization, GELU, feed-forward networks, Transformer blocks, and GPT-style output heads.
+* **Text generation**: greedy decoding, top-k filtering, temperature sampling, and context-window cropping.
+* **Fine-tuning**: adapting a GPT-style model for classification and supervised instruction tuning.
+* **Evaluation**: scoring generated instruction responses with a local Ollama judge model.
 
-* **SMS spam classification**: prepare a balanced dataset, replace the language-model head with a classification head, train, evaluate, and run inference.
-* **Instruction tuning**: prepare instruction-response examples, apply custom padding and target masking, fine-tune the model, and generate responses for evaluation.
-
-### Automated Evaluation
-
-Generated instruction responses can be scored with a local Ollama model. This keeps evaluation reproducible without depending on external hosted APIs.
-
-## Installation
+## 🛠️ Installation
 
 Python 3.10 or newer is recommended.
 
@@ -91,41 +83,41 @@ To load original OpenAI GPT-2 TensorFlow checkpoints, install TensorFlow as well
 pip install "tensorflow>=2.15"
 ```
 
-## Quickstart
+## 🚀 Quickstart
 
-### Inspect the Data Pipeline
+### Inspect the data pipeline
 
 ```bash
 python scripts/ch02_data_pipeline.py --text-file the-verdict.txt
 ```
 
-### Run the Attention Demo
+### Run causal multi-head attention
 
 ```bash
 python scripts/ch03_attention_demo.py
 ```
 
-### Build a Small GPT Model
+### Build a small GPT model
 
 ```bash
 python scripts/ch04_build_gpt.py --config tiny
 ```
 
-### Generate Text
-
-Run a quick generation smoke test with the tiny GPT configuration:
+### Generate text
 
 ```bash
 python scripts/ch05_pretrain_or_load_gpt2.py --prompt "Every effort moves you"
 ```
 
-Generate text with OpenAI GPT-2 124M weights:
+Generate with OpenAI GPT-2 124M weights:
 
 ```bash
 python scripts/ch05_pretrain_or_load_gpt2.py --pretrained --prompt "Every effort moves you"
 ```
 
-### Fine-tune a Spam Classifier
+## 🧠 Workflows
+
+### Fine-tune a spam classifier
 
 Prepare the SMS spam dataset:
 
@@ -139,15 +131,15 @@ Train the classifier:
 python scripts/ch06_finetune_classifier.py --mode train --epochs 5
 ```
 
-Run inference with a trained checkpoint:
+Run inference:
 
 ```bash
 python scripts/ch06_finetune_classifier.py --mode infer --text "Hey, are we still meeting tonight?"
 ```
 
-### Run Instruction Tuning and Evaluation
+### Run instruction tuning and evaluation
 
-Preview the instruction data format:
+Preview the instruction format:
 
 ```bash
 python scripts/ch07_instruction_tuning_eval.py --mode preview
@@ -171,7 +163,7 @@ Score generated responses with a local Ollama model:
 python scripts/ch07_instruction_tuning_eval.py --mode evaluate --ollama-model phi3
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 .
@@ -206,7 +198,7 @@ python scripts/ch07_instruction_tuning_eval.py --mode evaluate --ollama-model ph
 └── README.md
 ```
 
-## Main Modules
+## 🧩 Main Modules
 
 | Module | Purpose |
 | --- | --- |
@@ -219,7 +211,7 @@ python scripts/ch07_instruction_tuning_eval.py --mode evaluate --ollama-model ph
 | `evaluation.py` | Local Ollama-based response scoring |
 | `gpt2_weights.py` | Downloading and loading OpenAI GPT-2 checkpoints |
 
-## Data and Checkpoints
+## 📦 Data and Checkpoints
 
 The repository intentionally excludes generated data and large model files:
 
@@ -232,7 +224,7 @@ The repository intentionally excludes generated data and large model files:
 
 If trained weights need to be shared, use GitHub Releases, Hugging Face Hub, or another model hosting service instead of committing them directly.
 
-## Verification
+## ✅ Verification
 
 Run the test suite:
 
@@ -240,7 +232,7 @@ Run the test suite:
 pytest
 ```
 
-Run a quick syntax check:
+Run a syntax check:
 
 ```bash
 python -m compileall src scripts tests
@@ -248,17 +240,17 @@ python -m compileall src scripts tests
 
 The repository also includes a GitHub Actions workflow that runs these checks on pushes and pull requests to `main`.
 
-## Acknowledgement
+## 👍 Acknowledgement
 
 This project follows the model-building path popularized by Sebastian Raschka's **Build a Large Language Model From Scratch** and its companion open-source code. The implementation here is organized as a standalone PyTorch project with additional fine-tuning and evaluation workflows.
 
-## License
+## 🔒 License
 
 This repository is released under the Apache 2.0 License. See [`LICENSE`](LICENSE) for details.
 
 The GPT-2 checkpoint download and loading helper is adapted from Sebastian Raschka's `LLMs-from-scratch` project and retains its Apache 2.0 license notice.
 
-## Citation
+## ✏️ Citation
 
 If this repository is useful for your learning or project, please cite the original book/project:
 
