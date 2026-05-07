@@ -1,0 +1,12 @@
+torch>=2.2
+tiktoken>=0.7
+numpy>=1.26
+requests>=2.31
+tqdm>=4.66
+pandas>=2.0
+matplotlib>=3.8
+psutil>=5.9
+
+# Optional: required only when loading the original OpenAI GPT-2 TensorFlow checkpoints.
+# tensorflow>=2.15
+

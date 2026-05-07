@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Large model/checkpoint artifacts
+gpt2/
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+model_and_optimizer.pth
+model.pth
+review_classifier.pth
+*sft.pth
+
+# Downloaded/generated datasets
+data/
+sms_spam_collection/
+sms_spam_collection.zip
+train.csv
+validation.csv
+test.csv
+instruction-data-with-response.json
+
+# Local outputs
+outputs/
+plots/
+*.pdf
+
+# Original scratch scripts kept locally but not uploaded
+Attention_mechanism_yan_3.py
+Data_sampling_preparation_yan1_2.py
+Fine_tuning_for_classification06.py
+Follow_human_instructions_for_fine-tuning07.py
+GPT_like_models04_Review.py
+On_unlabeled_data_for_pre_training05.py
+gpt_download.py
