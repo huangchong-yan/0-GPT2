@@ -9,7 +9,7 @@ git init
 git add README.md LICENSE .gitignore pyproject.toml requirements.txt src scripts docs the-verdict.txt instruction-data.json
 git commit -m "Organize GPT-2 from scratch and LLM fine-tuning workflows"
 git branch -M main
-git remote add origin https://github.com/<your-name>/<your-repo>.git
+git remote add origin https://github.com/huangchong-yan/0-GPT2.git
 git push -u origin main
 ```
 

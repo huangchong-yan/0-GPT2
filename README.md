@@ -71,8 +71,8 @@
 建议使用 Python 3.10 或更高版本。
 
 ```bash
-git clone https://github.com/<your-name>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/huangchong-yan/0-GPT2.git
+cd 0-GPT2
 
 python -m venv .venv
 .venv\Scripts\activate
@@ -264,4 +264,3 @@ If this repository helps your learning or project, please consider citing the or
   publisher = {Manning Publications}
 }
 ```
-
